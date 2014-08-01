@@ -11,4 +11,10 @@ According to MIT, the most effective method of study includes a 10-minute break 
 According to ME, 10 minutes is plenty of time to get any number of little, annoying things done. The things that stack up and create mental chaos.
 It just takes a little planning and reminding.
 
+*** Note: at this time browseLocal will create a file 'breaks.html' in the users home directory.  Apologies, until I figure out Python relative paths. ***
+
 (The current test version executes every 10 seconds for testing)
+
+To run, open Terminal, navigate to the breakTimer directory, and type:
+
+python breakTimer.py
