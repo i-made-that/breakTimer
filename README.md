@@ -13,7 +13,7 @@ It just takes a little planning and reminding.
 
 *** Note: at this time browseLocal will create a file 'breaks.html' in the users home directory.  Apologies, until I figure out Python relative paths. ***
 
-(The current test version executes every 10 seconds for testing)
+(The current test version executes every 10 seconds for testing.  To change this, open breakTimer.py in a text editor (NOT WORD) and follow instructions on line 22)
 
 To run, open Terminal, navigate to the breakTimer directory, and type:
 
