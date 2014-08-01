@@ -19,7 +19,7 @@ import random
 
 def main():
     userTasks = []
-    work(inputList(userTasks), 10)
+    work(inputList(userTasks), 10) # Value in seconds.  Change to 50*60 for actual 50 minute block
     
 def strToFile(html, filename):
     '''
