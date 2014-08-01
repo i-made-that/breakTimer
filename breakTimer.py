@@ -48,7 +48,7 @@ def inputList(tasks):
     '''
     
     while True:
-        task = raw_input('Input today\'s tasks (s to start working): ')
+        task = raw_input('Input tasks (s to start working): ')
         
         if task == 's':
             return tasks or []
@@ -67,15 +67,21 @@ def work(tasks, n):
     returns: nothing
     '''
     if tasks == []:
-        print 'You didn\'t enter any tasks!'
-        return
+        begin = raw_input('You didn\'t enter any tasks! (t to add tasks/any other key to quit) ')
+        if begin == 't':
+            inputList(tasks)
+        else:
+            return
     
     while True:    
          
         # begin = raw_input('Begin a ' + str(n / 60.0) + ' minute block (b to begin/q to quit)? ')
-        begin = raw_input('Begin a 50 minute block? (b to begin/q to quit): ')
+        begin = raw_input('Begin a 50 minute block? (b to begin/t to add more tasks/q to quit): ')
         if begin == 'q':
             return
+            
+        elif begin == 't':
+            inputList(tasks)
         
         elif tasks == []:
             contents = '<center><p style="font-size:250px">No more tasks, go for a walk!</p></center>'
