@@ -22,9 +22,9 @@ import random
 
 def main():
     userTasks = []
-    work(inputList(userTasks), 10) # Value in seconds.  Change to 50*60 for actual 50 minute block
+    work(createTaskList(userTasks), 10) # Value in seconds.  Change to 50*60 for actual 50 minute block
     
-def strToFile(html, filename):
+def writeFile(html, filename):
     '''
     Write a file with the given name and the given text.
     '''
@@ -32,7 +32,7 @@ def strToFile(html, filename):
     output.write(html)
     output.close()
 
-def browseLocal(currentBreak, filename='breaks.html'):
+def openHTMLinBrowser(currentTask, filename='breaks.html'):
     '''
     Opens browser tab with filename url loaded
     
@@ -40,10 +40,10 @@ def browseLocal(currentBreak, filename='breaks.html'):
     Apologies, until I figure out Python relative paths.
     
     '''
-    strToFile(currentBreak, filename)
+    writeFile(currentTask, filename)
     webbrowser.open("file:///" + os.path.abspath(filename)) # elaborated for Mac
 
-def inputList(tasks):
+def createTaskList(tasks):
     '''
     Take a list and append raw_inputs until the user exits
     expects: list
@@ -51,16 +51,29 @@ def inputList(tasks):
     '''
     
     while True:
-        task = raw_input('Input tasks (s to start working): ')
+        task = raw_input('Input your tasks one at a time (s to start working/v to view tasks): ')
         
         if task == 's':
             return tasks or []
+        elif task == 'v':
+            printTasks(tasks, 'o')
         elif task == '':
             pass
         else: 
             tasks.append(task)
-        
 
+def printTasks(tasks, orderedUnordered):
+    '''
+    expects: list
+    prints: contents of list in numeric order
+    '''
+    if orderedUnordered == 'o':
+        for idx in range(len(tasks)):
+            print str(idx + 1) + '. ' + tasks[idx]
+    elif orderedUnordered == 'u':
+        for task in tasks:
+            print task
+    
 def work(tasks, n):
     '''
     Launch a browser tab n seconds after user starts a 'block' with random task from 'tasks' list embedded in html.
@@ -69,26 +82,37 @@ def work(tasks, n):
     expects: list
     returns: nothing
     '''
+    completedTasks = []
+    
     if tasks == []:
         begin = raw_input('You didn\'t enter any tasks! (t to add tasks/any other key to quit) ')
         if begin == 't':
-            inputList(tasks)
+            createTaskList(tasks)
         else:
             return
     
     while True:    
          
         # begin = raw_input('Begin a ' + str(n / 60.0) + ' minute block (b to begin/q to quit)? ')
-        begin = raw_input('Begin a 50 minute block? (b to begin/t to add more tasks/q to quit): ')
+        begin = raw_input('Begin a 50 minute block? (b to begin/t to add more tasks/v to view tasks/q to quit): ')
         if begin == 'q':
             return
+        
+        elif begin == 'v':
+            print 'PENDING TASKS: '
+            printTasks(tasks, 'o')
+            print 'COMPLETED TASKS: '
+            if completedTasks == []:
+                print 'You\'ve done nothing!'
+            else:
+                printTasks(completedTasks, 'u')
             
         elif begin == 't':
-            inputList(tasks)
+            createTaskList(tasks)
         
         elif tasks == []:
             contents = '<center><p style="font-size:250px">No more tasks, go for a walk!</p></center>'
-            browseLocal(contents)
+            openHTMLinBrowser(contents)
             return
         
         #3 If yes, wait x minutes
@@ -98,16 +122,18 @@ def work(tasks, n):
             #4 After x minutes, execute break
             randomTask = random.randint(0, len(tasks) - 1)
         
-            contents = '<center><p style="font-size:250px">' + tasks[randomTask] + '</p></center>'
+            htmlTask = '<center><p style="font-size:250px">' + tasks[randomTask] + '</p></center>'
         
-            browseLocal(contents)
-          
-            #5 Remove current task from list
-            tasks.remove(tasks[randomTask])
-            #7 Return tasklist    
-      
-            #print tasks
-    
+            openHTMLinBrowser(htmlTask)
+            
+            discard = raw_input('Did you complete your task? (y for yes, d to delete it, any other key to keep it in the task list): ')
+            if discard == 'y':
+                completedTasks.append(tasks[randomTask])
+                tasks.remove(tasks[randomTask])
+            elif discard == 'd':            
+                tasks.remove(tasks[randomTask])
+                
+            
 
 if __name__ == '__main__':
     main()
