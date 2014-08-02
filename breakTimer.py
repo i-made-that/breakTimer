@@ -99,9 +99,9 @@ def work(tasks, n):
             return
         
         elif begin == 'v':
-            print 'PENDING TASKS: '
+            print '\nPENDING TASKS: '
             printTasks(tasks, 'o')
-            print 'COMPLETED TASKS: '
+            print '\nCOMPLETED TASKS: '
             if completedTasks == []:
                 print 'You\'ve done nothing!'
             else:
