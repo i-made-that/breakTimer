@@ -4,6 +4,7 @@
 
 BreakTimer is a simple Python script that allows users to create a daily task list. 
 It then 'executes' one of these tasks every 50 minutes by opening an (intentionally) annoying browser tab.
+After you complete your task you will be prompted to start another time block.
 
 According to MIT, the most effective method of study includes a 10-minute break for every 50 minutes of work.
 
