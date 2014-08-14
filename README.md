@@ -11,5 +11,4 @@ According to MIT, the most effective method of study includes a 10-minute break 
 According to ME, 10 minutes is plenty of time to get any number of little, annoying things done. The things that stack up and create mental chaos.
 It just takes a little planning and reminding.
 
-(The current test version launches a task every 10 seconds for testing.  To change this, open breakTimer.py in a text editor  and follow instructions on line 22)
-
+(Currently launches a task every 10 seconds for testing)
